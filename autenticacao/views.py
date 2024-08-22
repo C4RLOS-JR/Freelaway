@@ -36,7 +36,7 @@ def cadastro(request):
       )
       novo_usuario.save()
       
-      messages.add_message(request, constants.SUCCESS, 'Usuário cadastrado com sucesso...faça o login para entrar!')
+      messages.add_message(request, constants.SUCCESS, 'Usuário cadastrado com sucesso!')
       return redirect('logar')
     
     except:

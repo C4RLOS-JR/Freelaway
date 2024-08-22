@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'autenticacao',
+    'jobs',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,7 @@ MESSAGE_TAGS = {
   constants.WARNING: 'alert-warning',
   constants.INFO: 'alert-info'
 }
+
+# Email
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
