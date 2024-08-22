@@ -2,17 +2,12 @@
 {% load static %}
 
 {% block 'head' %}
-  <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+  <link rel="stylesheet" href="{% static 'css/autenticacao.css' %}">
 {% endblock %}
 
 {% block 'body' %}
 
-  <br>
-  {% if messages %}
-    {% for message in messages %}
-      <div class="container alert {{message.tags}}">{{message}}</div>
-    {% endfor %}
-  {% endif %}
+  
 
   <div class="box">
     <form action="{% url 'logar' %}" method="post">{% csrf_token %}
@@ -27,5 +22,14 @@
       <input type="submit" value="LOGAR" class="btn btn-success btn-lg">
       <a href="{% url 'cadastro' %}" class="btn btn-primary btn-lg">CADASTRO</a>
     </form>
+    <br>
+    
+    {% if messages %}
+      {% for message in messages %}
+        <div class="container alert {{message.tags}}">
+          {{message}}
+        </div>
+      {% endfor %}
+    {% endif %}
   </div>
 {% endblock %}
