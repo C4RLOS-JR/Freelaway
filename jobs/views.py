@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import Jobs
 
-# Create your views here.
+def encontrar_jobs(request):
+  if request.method == 'GET':
+    jobs = Jobs.objects.all()
+    
