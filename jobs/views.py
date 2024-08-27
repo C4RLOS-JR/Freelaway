@@ -2,6 +2,6 @@ from django.shortcuts import render, redirect
 from .models import Jobs
 
 def encontrar_jobs(request):
+  jobs = Jobs.objects.all()
   if request.method == 'GET':
-    jobs = Jobs.objects.all()
-    
+    return render(request, 'encontrar_jobs.html')  

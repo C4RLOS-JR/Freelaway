@@ -47,7 +47,7 @@ def cadastro(request):
 def logar(request):
   if request.method == 'GET':
     if request.user.is_authenticated:
-      return redirect('/jobs')
+      return redirect('encontrar_jobs')
     return render(request, 'login.html')
 
   if request.method == 'POST':
