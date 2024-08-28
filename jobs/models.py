@@ -28,7 +28,7 @@ class Jobs(models.Model):
   titulo = models.CharField(max_length=50)
   descricao = models.TextField()
   categoria = models.CharField(max_length=2, choices=categoria_choices, default='D')
-  prazo_entrega = models.DateTimeField()
+  prazo_entrega = models.DateField()
   preco = models.FloatField()
   referencias = models.ManyToManyField(Referencias)
   profissional = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, blank=True)
