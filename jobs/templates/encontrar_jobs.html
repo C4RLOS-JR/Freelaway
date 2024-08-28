@@ -5,18 +5,20 @@
   <link rel="stylesheet" href="{% static 'css/jobs.css' %}" />
 {% endblock %}
 
+{% block 'title' %}Job's em aberto{% endblock  %}
+
 {% block 'body' %}
 
   <div class="container">
     <br />
     <br />
 
-    <form action="/teste" method="POST">
+    <form action="{% url 'encontrar_jobs' %}" method="GET"> {% csrf_token %}
       <div class="row">
         <div class="col-sm">
-          <input type="text" class="form-control" placeholder="Preço mínimo" name="preco_minimo" />
+          <input type="number" class="form-control" placeholder="Preço mínimo" name="preco_minimo" />
           <br />
-          <input type="text" class="form-control" placeholder="Preço máximo" name="preco_maximo" />
+          <input type="number" class="form-control" placeholder="Preço máximo" name="preco_maximo" />
         </div>
         <div class="col-sm">
           <input type="date" class="form-control" name="prazo_minimo" />
@@ -25,11 +27,13 @@
         </div>
         <div class="col-sm">
           <select class="form-control" name="categoria">
+            <option value="">Selecione uma categoria</option>
             <option value="D">Design</option>
             <option value="EV">Edição de vídeo</option>
           </select>
           <br />
-          <input type="submit" class="btn btn-success btn-lg" value="FILTRAR" />
+          <input type="submit" class="btn btn-success btn-md" value="FILTRAR" />&nbsp
+          <a href="{% url 'encontrar_jobs' %}" class="btn btn-info btn-md">TODOS</a>
         </div>
       </div>
     </form>
@@ -37,8 +41,8 @@
     <br />
 
     <h2 class="titulo">JOB’S EM ABERTO:</h2>
-    {% for job in jobs %}
-      <div class="row justify-content-around">
+    <div class="row justify-content-around">
+      {% for job in jobs %}
         <div class="col-6 row-card">
           <div class="card-job">
             <div class="header-job">
@@ -75,8 +79,9 @@
             </div>
           </div>
         </div>
-      </div>
-    {% endfor %}
+      {% endfor %}
+    </div>
+    
   </div>
 
 {% endblock %}
