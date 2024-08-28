@@ -63,7 +63,7 @@ def logar(request):
     messages.add_message(request, constants.SUCCESS, 'Login efetuado com sucesso!')
     auth.login(request, usuario)
 
-    return redirect('/jobs')
+    return redirect('encontrar_jobs')
   
 def sair(request):
   auth.logout(request)
