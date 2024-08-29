@@ -2,22 +2,26 @@
 {% load static %}
 
 {% block 'head' %}
-  <link rel="stylesheet" href="{% static 'css/encontrar_jobs.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/jobs.css' %}" />
   <link rel="stylesheet" href="{% static 'css/perfil.css' %}" />
 {% endblock %}
 
 {% block 'title' %}Perfil do usuário{% endblock  %}
 
 {% block 'body' %}
-  <br />
-  <br />
   <div class="container">
-    {% if messages %} {% for message in messages %}
-    <div class="alert {{message.tags}}">{{message}}</div>
-    {% endfor %} {% endif %}
+    <br>
+     <!--Mensagens-->
+      <div class="messages">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="alert {{message.tags}}">{{message}}</div>
+          {% endfor %}
+        {% endif %}
+      </div>
+
     <div style="width: 60%">
-      <form action="{% url 'perfil' %}" method="POST">
-        {% csrf_token %}
+      <form action="{% url 'perfil' %}" method="POST"> {% csrf_token %}
         <p>Username:</p>
         <input type="text" class="form-control" value="{{user.username}}" name="username" />
         <br />
@@ -48,13 +52,23 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row"><img width="100px" src="/media/referencias/AULA_01_1.png" /></th>
-          <td>a</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>x</td>
-        </tr>
+        {% for job in jobs %}
+          <tr>
+            <th scope="row"><img width="100px" src="{{job.referencias.all.0}}" /></th>
+            <td>{{job.titulo}}</td>
+            <td>{% if job.categoria == 'D' %}Design{% else %}Edição de Vídeo{% endif %}</td>
+            <td>{{job.descricao}}</td>
+            <td>
+              {% if job.status == 'C' %}
+                <span class="badge badge-info">Em Criação</span>
+              {% elif 'AA' %}
+                <span class="badge badge-primary">Aguardando Aprovação</span>  
+              {% else %}
+                <span class="badge badge-success">Finalizado</span>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
       </tbody>
     </table>
 </div>

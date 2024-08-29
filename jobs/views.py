@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
 from .models import Jobs
+from django.contrib import messages
+from django.contrib.messages import constants
 
 def encontrar_jobs(request):
   preco_minimo = request.GET.get('preco_minimo')
@@ -20,7 +23,7 @@ def encontrar_jobs(request):
   if categoria:
     jobs = jobs.filter(categoria=categoria)
 
-  jobs = jobs.order_by('prazo_entrega') # Ordena os 
+  jobs = jobs.order_by('prazo_entrega') # Ordena os jobs pelo prazo de entrega.
 
   return render(request, 'encontrar_jobs.html', {'jobs': jobs})
 
@@ -36,4 +39,29 @@ def aceitar_job(request, id_job):
 
 def perfil(request):
   if request.method == 'GET':
-    return render(request, 'perfil.html')
+    jobs = Jobs.objects.filter(profissional=request.user)
+    return render(request, 'perfil.html', {'jobs': jobs})
+  elif request.method == 'POST':
+    username = request.POST.get('username')
+    email = request.POST.get('email')
+    first_name = request.POST.get('primeiro_nome')
+    last_name = request.POST.get('ultimo_nome')
+
+    usuario = User.objects.filter(username=username).exclude(id=request.user.id)
+
+    if usuario.exists():
+      messages.add_message(request, constants.ERROR, 'Já existe um usuário com esse username!')
+      return redirect('perfil')
+
+    try:
+      request.user.username = username
+      request.user.email = email
+      request.user.first_name = first_name
+      request.user.last_name = last_name
+      request.user.save()
+      messages.add_message(request, constants.SUCCESS, 'Dados alterados com sucesso!')
+    except:
+      messages.add_message(request, constants.ERROR, 'Algo deu errado...tente novamente ou contate um administrador!')
+
+    return redirect('perfil')
+

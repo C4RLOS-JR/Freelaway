@@ -57,3 +57,14 @@
   font-size: 30px;
   font-weight: bold;
 }
+
+.messages {
+  height: 45px;
+}
+
+.menu {
+  position: fixed;  /* Fixa a navbar na tela */
+  top: 0;           /* Posiciona no topo da página */
+  width: 100%;      /* Ocupa a largura total da tela */
+  z-index: 1000;    /* Garante que a navbar fique sobre outros elementos */
+}
