@@ -20,4 +20,6 @@ def encontrar_jobs(request):
   if categoria:
     jobs = jobs.filter(categoria=categoria)
 
+  jobs = jobs.order_by('prazo_entrega') # Ordena os 
+
   return render(request, 'encontrar_jobs.html', {'jobs': jobs})
