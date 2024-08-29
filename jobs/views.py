@@ -23,3 +23,17 @@ def encontrar_jobs(request):
   jobs = jobs.order_by('prazo_entrega') # Ordena os 
 
   return render(request, 'encontrar_jobs.html', {'jobs': jobs})
+
+
+def aceitar_job(request, id_job):
+  job = Jobs.objects.get(id=id_job)
+  job.profissional = request.user
+  job.reservado = True
+  job.save()
+
+  return redirect('encontrar_jobs')
+
+
+def perfil(request):
+  if request.method == 'GET':
+    return render(request, 'perfil.html')
