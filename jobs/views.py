@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from .models import Jobs
 from django.contrib import messages
 from django.contrib.messages import constants
+from django.http import HttpResponse, FileResponse
+
 
 def encontrar_jobs(request):
   preco_minimo = request.GET.get('preco_minimo')
@@ -65,3 +67,10 @@ def perfil(request):
 
     return redirect('perfil')
 
+
+def enviar_projeto(request):
+  id_job = request.POST.get('id_job')
+  arquivos = request.FILES.get('arquivos')
+  job = Jobs.objects.get(id)
+
+  pass
