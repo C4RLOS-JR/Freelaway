@@ -101,7 +101,7 @@
 
               <form action="{% url 'enviar_projeto' %}" method="POST" enctype="multipart/form-data"> {% csrf_token %}
                 <input type="file" class="form-control" placeholder="Enviar arquivos" name="arquivos" />
-                <input type="hidden" value="job.id" name="id_job">
+                <input type="hidden" value="{{job.id}}" name="id_job">
                 <br />
                 <input type="submit" value="Enviar" class="btn btn-success btn-lg" />
               </form>
