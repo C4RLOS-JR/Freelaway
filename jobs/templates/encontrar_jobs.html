@@ -16,21 +16,27 @@
 	<form action="{% url 'encontrar_jobs' %}" method="GET"> {% csrf_token %}
 		<div class="row">
 			<div class="col-sm">
-				<input type="number" class="form-control" placeholder="Preço mínimo" name="preco_minimo" />
+        <span>Preço mínimo</span>
+				<input type="number" class="form-control" placeholder="R$" name="preco_minimo" />
 				<br />
-				<input type="number" class="form-control" placeholder="Preço máximo" name="preco_maximo" />
+        <span>Preço máximo</span>
+				<input type="number" class="form-control" placeholder="R$" name="preco_maximo" />
 			</div>
 			<div class="col-sm">
+        <span>Prazo mínimo</span>
 				<input type="date" class="form-control" name="prazo_minimo" />
 				<br />
+        <span>Prazo máximo</span>
 				<input type="date" class="form-control" name="prazo_maximo" />
 			</div>
 			<div class="col-sm">
+        <span>Categoria</span>
 				<select class="form-control" name="categoria">
 					<option value="">Selecione uma categoria</option>
 					<option value="D">Design</option>
 					<option value="EV">Edição de vídeo</option>
 				</select>
+				<br />
 				<br />
 				<input type="submit" class="btn btn-success btn-md" value="FILTRAR" />&nbsp
 				<a href="{% url 'encontrar_jobs' %}" class="btn btn-info btn-md">TODOS</a>

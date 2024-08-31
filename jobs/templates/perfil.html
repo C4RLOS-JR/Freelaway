@@ -19,20 +19,27 @@
       {% endfor %} {% endif %}
     </div>
 
-    <div style="width: 60%">
+    <div>
       <form action="{% url 'perfil' %}" method="POST"> {% csrf_token %}
-        <p>Username:</p>
-        <input type="text" class="form-control" value="{{user.username}}" name="username" />
-        <br />
-        <p>Email:</p>
-        <input type="email" class="form-control" value="{{user.email}}" name="email" />
-        <br />
-        <p>Primeiro nome:</p>
-        <input type="text" class="form-control" value="{{user.first_name}}" name="primeiro_nome" />
-        <br />
-        <p>Último nome:</p>
-        <input type="text" class="form-control" value="{{user.last_name}}" name="ultimo_nome" />
-        <br />
+        <div class="row">
+          <div class="col-md">
+            <p>Username:</p>
+            <input type="text" class="form-control" value="{{user.username}}" name="username" />
+            <br />
+            <p>Email:</p>
+            <input type="email" class="form-control" value="{{user.email}}" name="email" />
+          </div>
+
+          <div class="col-md">
+            <p>Primeiro nome:</p>
+            <input type="text" class="form-control" value="{{user.first_name}}" name="primeiro_nome" />
+            <br />
+            <p>Último nome:</p>
+            <input type="text" class="form-control" value="{{user.last_name}}" name="ultimo_nome" />
+          </div>
+        </div>
+          <br />
+          
         <input type="submit" class="btn btn-success btn-lg" value="Salvar alterações" />
       </form>
     </div>
@@ -61,7 +68,7 @@
               {% if job.status == 'C' %}
                 <button class="badge badge-primary" data-toggle="modal" data-target="#modal-job-{{job.id}}">Em criação</button>
               {% elif 'AA' %}
-                <span class="badge badge-primary">Aguardando Aprovação</span>
+                <span class="badge badge-warning">Aguardando Aprovação</span>
               {% else %}
                 <span class="badge badge-success">Finalizado</span>
               {% endif %}
@@ -89,7 +96,7 @@
               <br />
               <h6 class="titulo-body">Status:</h6>
               {% if job.status == 'AA'%}
-                <span class="badge badge-info">Aguardando aprovação</span>
+                <span class="badge badge-warning">Aguardando aprovação</span>
               {% elif job.status == 'C' %}
                 <a class="badge badge-primary">Em criação</a>
               {% else %}

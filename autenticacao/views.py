@@ -12,12 +12,12 @@ def cadastro(request):
     return render(request, 'cadastro.html')
   elif request.method == 'POST':
     username = request.POST.get('username')
+    email = request.POST.get('email')
     password = request.POST.get('password')
     confirm_password = request.POST.get('confirm_password')
 
-    if len(username.strip())==0 or len(password.strip())==0:
+    if len(username.strip())==0 or len(email.strip())==0 or len(password.strip())==0:
       messages.add_message(request, constants.ERROR, "Preencha todos os campos!")
-      return redirect('cadastro')
       return redirect('cadastro')
     if password != confirm_password:
       messages.add_message(request, constants.ERROR, 'As senhas não são iguais!')
@@ -32,6 +32,7 @@ def cadastro(request):
     try:
       novo_usuario = User.objects.create_user(
         username = username,
+        email = email,
         password = password
       )
       novo_usuario.save()
@@ -60,7 +61,6 @@ def logar(request):
       messages.add_message(request, constants.ERROR, 'Nome do usuário ou senha inválidos!')
       return redirect('logar')
     
-    messages.add_message(request, constants.SUCCESS, 'Login efetuado com sucesso!')
     auth.login(request, usuario)
 
     return redirect('encontrar_jobs')

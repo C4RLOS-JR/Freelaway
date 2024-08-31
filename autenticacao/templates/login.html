@@ -11,7 +11,7 @@
 
   <div class="box">
     <form action="{% url 'logar' %}" method="post">{% csrf_token %}
-      <h1 class="titulo font-degrade borda-bottom-degrade">LOGAR</h2>
+      <h1 class="titulo font-degrade borda-bottom-degrade">ENTRAR</h2>
       <br>
       <span class="span-descricao">Nome de usuário:</span>
       <input type="text" class="form-control input-cadastro" name="username">
@@ -21,8 +21,8 @@
       <a href="{% url 'password_reset' %}">Esqueci minha senha!</a>
       <br>
       <br>
-      <input type="submit" value="LOGAR" class="btn btn-success btn-lg">
-      <a href="{% url 'cadastro' %}" class="btn btn-primary btn-lg">CADASTRO</a>
+      <input type="submit" value="ENTRAR" class="btn btn-success btn-lg">
+      <a href="{% url 'cadastro' %}" class="btn btn-primary btn-lg">CADASTRAR</a>
     </form>
     <br>
     
